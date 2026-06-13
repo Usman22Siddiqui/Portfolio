@@ -3,25 +3,132 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #08080a;
+  --foreground: #f4f4f5;
+  --accent: #ff7e33;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), sans-serif;
+  scroll-behavior: auto;
+  overflow-x: clip;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #08080a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f1f2e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Glassmorphism helpers */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-glow {
+  box-shadow: 0 0 40px 0 rgba(255, 126, 51, 0.05);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 126, 51, 0.3);
+}
+
+/* Glass panel for project detail pages */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Blur reveal animation */
+.blur-reveal {
+  animation: blurReveal 0.8s ease-out forwards;
+}
+
+@keyframes blurReveal {
+  from {
+    filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .blur-reveal {
+    animation: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== Preview component animations (CSS-only, no JS overhead) ===== */
+
+/* Jarvis Preview */
+@keyframes jarvis-wave {
+  0%, 100% { height: 2px; }
+  50% { height: var(--wave-h); }
+}
+@keyframes jarvis-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes jarvis-rotate-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+@keyframes jarvis-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(245,158,11,0.2); }
+  50% { box-shadow: 0 0 40px rgba(245,158,11,0.4); }
+}
+@keyframes jarvis-dot {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ClinicFlow Preview */
+@keyframes clinic-wave {
+  0%, 100% { height: 4px; }
+  50% { height: var(--wave-h); }
+}
+
+/* California Fish Grill Preview */
+@keyframes cfg-wave {
+  0%, 100% { d: path("M0,25 C100,10 150,40 200,25 C250,10 300,40 400,25 L400,50 L0,50 Z"); }
+  50% { d: path("M0,30 C100,40 150,10 200,30 C250,40 300,10 400,30 L400,50 L0,50 Z"); }
+}
+
