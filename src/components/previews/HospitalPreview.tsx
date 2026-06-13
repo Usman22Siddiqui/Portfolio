@@ -17,7 +17,7 @@ export default function HospitalPreview() {
 
       <div className="flex h-[calc(100%-28px)]">
         {/* Sidebar */}
-        <div className="w-20 bg-[#0f3460]/50 border-r border-white/5 p-2 space-y-1.5">
+        <div className="hidden sm:block w-20 bg-[#0f3460]/50 border-r border-white/5 p-2 space-y-1.5">
           {["🏠 Home", "👤 Patients", "📅 Appts", "💰 Billing", "👥 Staff"].map((item, i) => (
             <motion.div
               key={item}

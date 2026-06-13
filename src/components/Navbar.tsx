@@ -37,11 +37,11 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "py-3 backdrop-blur-md bg-[#08080a]/70 border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
-          : "py-5 bg-transparent"
+          ? "py-2.5 sm:py-3 backdrop-blur-md bg-[#08080a]/70 border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+          : "py-4 sm:py-5 bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between">
         {/* Logo */}
         <div className="text-white font-bold text-xl tracking-tighter">
           USMAN<span className="text-accent">.</span>

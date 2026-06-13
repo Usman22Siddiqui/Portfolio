@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import BrowserFrame from "./BrowserFrame";
 
@@ -15,6 +15,14 @@ export default function ScrollSequence({ screenshots, title, accentColor, liveUr
   const containerRef = useRef<HTMLDivElement>(null);
   const displayScreenshots = screenshots.slice(0, 6);
   const shouldReduceMotion = useReducedMotion();
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -64,39 +72,191 @@ export default function ScrollSequence({ screenshots, title, accentColor, liveUr
   // --- ENTRANCE + EXPLODED TRANSFORMS ---
 
   // Screenshot 1 — Scale up from center, then scatter top-left
-  const s1Scale = useTransform(scrollYProgress, [0, 0.08, 0.75, 1], [0.8, 1, 1, 0.65]);
-  const s1X = useTransform(scrollYProgress, [0.75, 1], ["0%", "-60%"]);
-  const s1Y = useTransform(scrollYProgress, [0.75, 1], ["0%", "-30%"]);
-  const s1Rotate = useTransform(scrollYProgress, [0.75, 1], [0, -8]);
+  const s1Scale = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) {
+      if (v < 0.08) return 0.8 + (v / 0.08) * 0.2;
+      return 1;
+    } else {
+      const pct = (v - 0.75) / 0.25;
+      const targetScale = isMobile ? 0.85 : 0.65;
+      return 1 - pct * (1 - targetScale);
+    }
+  });
+  const s1X = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetX = isMobile ? -15 : -60;
+    return `${pct * targetX}%`;
+  });
+  const s1Y = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetY = isMobile ? -10 : -30;
+    return `${pct * targetY}%`;
+  });
+  const s1Rotate = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return 0;
+    const pct = (v - 0.75) / 0.25;
+    const targetRotate = isMobile ? -2 : -8;
+    return pct * targetRotate;
+  });
 
   // Screenshot 2 — Slide from left, then scatter top-right
-  const s2X = useTransform(scrollYProgress, [0.12, 0.20, 0.75, 1], ["-100%", "0%", "0%", "55%"]);
-  const s2Y = useTransform(scrollYProgress, [0.75, 1], ["0%", "-25%"]);
-  const s2Rotate = useTransform(scrollYProgress, [0.75, 1], [0, 5]);
-  const s2Scale = useTransform(scrollYProgress, [0.75, 1], [1, 0.7]);
+  const s2X = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) {
+      if (v < 0.12) return "-100%";
+      if (v > 0.20) return "0%";
+      const pct = (v - 0.12) / 0.08;
+      return `${-100 + pct * 100}%`;
+    } else {
+      const pct = (v - 0.75) / 0.25;
+      const targetX = isMobile ? 15 : 55;
+      return `${pct * targetX}%`;
+    }
+  });
+  const s2Y = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetY = isMobile ? -8 : -25;
+    return `${pct * targetY}%`;
+  });
+  const s2Rotate = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return 0;
+    const pct = (v - 0.75) / 0.25;
+    const targetRotate = isMobile ? 1 : 5;
+    return pct * targetRotate;
+  });
+  const s2Scale = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return 1;
+    const pct = (v - 0.75) / 0.25;
+    const targetScale = isMobile ? 0.85 : 0.7;
+    return 1 - pct * (1 - targetScale);
+  });
 
   // Screenshot 3 — Slide from right, then scatter bottom-left
-  const s3X = useTransform(scrollYProgress, [0.25, 0.33, 0.75, 1], ["100%", "0%", "0%", "-50%"]);
-  const s3Y = useTransform(scrollYProgress, [0.75, 1], ["0%", "30%"]);
-  const s3Rotate = useTransform(scrollYProgress, [0.75, 1], [0, -4]);
-  const s3Scale = useTransform(scrollYProgress, [0.75, 1], [1, 0.68]);
+  const s3X = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) {
+      if (v < 0.25) return "100%";
+      if (v > 0.33) return "0%";
+      const pct = (v - 0.25) / 0.08;
+      return `${100 - pct * 100}%`;
+    } else {
+      const pct = (v - 0.75) / 0.25;
+      const targetX = isMobile ? -12 : -50;
+      return `${pct * targetX}%`;
+    }
+  });
+  const s3Y = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetY = isMobile ? 10 : 30;
+    return `${pct * targetY}%`;
+  });
+  const s3Rotate = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return 0;
+    const pct = (v - 0.75) / 0.25;
+    const targetRotate = isMobile ? -1 : -4;
+    return pct * targetRotate;
+  });
+  const s3Scale = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return 1;
+    const pct = (v - 0.75) / 0.25;
+    const targetScale = isMobile ? 0.85 : 0.68;
+    return 1 - pct * (1 - targetScale);
+  });
 
   // Screenshot 4 — Zoom forward, then scatter right
-  const s4Scale = useTransform(scrollYProgress, [0.38, 0.46, 0.75, 1], [0.5, 1, 1, 0.72]);
-  const s4X = useTransform(scrollYProgress, [0.75, 1], ["0%", "60%"]);
-  const s4Y = useTransform(scrollYProgress, [0.75, 1], ["0%", "25%"]);
-  const s4Rotate = useTransform(scrollYProgress, [0.75, 1], [0, 6]);
+  const s4Scale = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) {
+      if (v < 0.38) return 0.5;
+      if (v > 0.46) return 1;
+      return 0.5 + ((v - 0.38) / 0.08) * 0.5;
+    } else {
+      const pct = (v - 0.75) / 0.25;
+      const targetScale = isMobile ? 0.85 : 0.72;
+      return 1 - pct * (1 - targetScale);
+    }
+  });
+  const s4X = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetX = isMobile ? 15 : 60;
+    return `${pct * targetX}%`;
+  });
+  const s4Y = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetY = isMobile ? 8 : 25;
+    return `${pct * targetY}%`;
+  });
+  const s4Rotate = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return 0;
+    const pct = (v - 0.75) / 0.25;
+    const targetRotate = isMobile ? 1 : 6;
+    return pct * targetRotate;
+  });
 
   // Screenshot 5 — Rotate in, then scatter top
-  const s5Rotate = useTransform(scrollYProgress, [0.50, 0.58, 0.75, 1], [-8, 0, 0, 3]);
-  const s5Scale = useTransform(scrollYProgress, [0.50, 0.58, 0.75, 1], [0.85, 1, 1, 0.75]);
-  const s5X = useTransform(scrollYProgress, [0.75, 1], ["0%", "0%"]);
-  const s5Y = useTransform(scrollYProgress, [0.75, 1], ["0%", "-45%"]);
+  const s5Rotate = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) {
+      if (v < 0.50) return isMobile ? -2 : -8;
+      if (v > 0.58) return 0;
+      const pct = (v - 0.50) / 0.08;
+      const startRot = isMobile ? -2 : -8;
+      return startRot + pct * (-startRot);
+    } else {
+      const pct = (v - 0.75) / 0.25;
+      const targetRotate = isMobile ? 1 : 3;
+      return pct * targetRotate;
+    }
+  });
+  const s5Scale = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) {
+      if (v < 0.50) return isMobile ? 0.9 : 0.85;
+      if (v > 0.58) return 1;
+      const pct = (v - 0.50) / 0.08;
+      const startScale = isMobile ? 0.9 : 0.85;
+      return startScale + pct * (1 - startScale);
+    } else {
+      const pct = (v - 0.75) / 0.25;
+      const targetScale = isMobile ? 0.85 : 0.75;
+      return 1 - pct * (1 - targetScale);
+    }
+  });
+  const s5X = useTransform(scrollYProgress, () => "0%");
+  const s5Y = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetY = isMobile ? -15 : -45;
+    return `${pct * targetY}%`;
+  });
 
   // Screenshot 6 — Scale in, then scatter slightly
-  const s6Scale = useTransform(scrollYProgress, [0.62, 0.70, 0.75, 1], [0.9, 1, 1, 1.05]);
-  const s6X = useTransform(scrollYProgress, [0.75, 1], ["0%", "5%"]);
-  const s6Y = useTransform(scrollYProgress, [0.75, 1], ["0%", "5%"]);
+  const s6Scale = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) {
+      if (v < 0.62) return isMobile ? 0.95 : 0.9;
+      if (v > 0.70) return 1;
+      const pct = (v - 0.62) / 0.08;
+      const startScale = isMobile ? 0.95 : 0.9;
+      return startScale + pct * (1 - startScale);
+    } else {
+      const pct = (v - 0.75) / 0.25;
+      const targetScale = isMobile ? 1.02 : 1.05;
+      return 1 + pct * (targetScale - 1);
+    }
+  });
+  const s6X = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetX = isMobile ? 2 : 5;
+    return `${pct * targetX}%`;
+  });
+  const s6Y = useTransform(scrollYProgress, (v) => {
+    if (v < 0.75) return "0%";
+    const pct = (v - 0.75) / 0.25;
+    const targetY = isMobile ? 2 : 5;
+    return `${pct * targetY}%`;
+  });
 
   // --- Z-INDEX ---
   // Slideshow: increasing order so each new screenshot covers previous ones.

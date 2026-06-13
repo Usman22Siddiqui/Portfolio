@@ -35,7 +35,7 @@ const achievements = [
 
 export default function Achievements() {
   return (
-    <section className="relative z-20 bg-[#08080a] py-32 px-6 md:px-8">
+    <section className="relative z-20 bg-[#08080a] py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -60,7 +60,7 @@ export default function Achievements() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className={`group rounded-2xl ${achievement.bgColor} border ${achievement.borderColor} p-8 transition-all duration-500 ${achievement.glowColor} hover:border-white/20`}
+                className={`group rounded-2xl ${achievement.bgColor} border ${achievement.borderColor} p-6 sm:p-8 transition-all duration-500 ${achievement.glowColor} hover:border-white/20`}
               >
                 <div className={`w-12 h-12 rounded-xl ${achievement.bgColor} border ${achievement.borderColor} flex items-center justify-center mb-5`}>
                   <Icon className={`w-6 h-6 ${achievement.color}`} />

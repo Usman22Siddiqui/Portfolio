@@ -33,9 +33,9 @@ export default function Overlay({ progress }: { progress: MotionValue<number> })
         {/* Section 1: Hero Title */}
         <motion.div
           style={{ opacity: titleOpacity, y: titleY, scale: titleScale, willChange: "transform, opacity" }}
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
         >
-          <h1 className="text-5xl sm:text-7xl md:text-[6rem] lg:text-[7rem] font-extrabold tracking-tighter text-white leading-[0.95]">
+          <h1 className="text-[2.5rem] sm:text-7xl md:text-[6rem] lg:text-[7rem] font-extrabold tracking-tighter text-white leading-[0.95]">
             M. Usman Siddiqui<span className="text-accent">.</span>
           </h1>
           <p className="mt-5 text-lg sm:text-xl md:text-2xl text-white/60 font-light tracking-wide">
@@ -55,13 +55,13 @@ export default function Overlay({ progress }: { progress: MotionValue<number> })
         {/* Section 2: Left aligned */}
         <motion.div
           style={{ opacity: leftOpacity, x: leftX, willChange: "transform, opacity" }}
-          className="absolute left-6 sm:left-12 md:left-20 lg:left-32 top-1/2 -translate-y-1/2 max-w-lg"
+          className="absolute left-4 right-4 md:left-20 lg:left-32 md:right-auto top-1/2 -translate-y-1/2 max-w-lg text-center md:text-left"
         >
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
             I build digital<br />
             <span className="text-accent italic font-extrabold">experiences</span>.
           </h2>
-          <p className="mt-5 text-base md:text-lg text-white/50 leading-relaxed max-w-md">
+          <p className="mt-5 text-base md:text-lg text-white/50 leading-relaxed max-w-md mx-auto md:mx-0">
             Crafting immersive web environments through performant animations,
             WebGL, and modern frontend frameworks.
           </p>
@@ -70,13 +70,13 @@ export default function Overlay({ progress }: { progress: MotionValue<number> })
         {/* Section 3: Right aligned */}
         <motion.div
           style={{ opacity: rightOpacity, x: rightX, willChange: "transform, opacity" }}
-          className="absolute right-6 sm:right-12 md:right-20 lg:right-32 top-1/2 -translate-y-1/2 max-w-lg text-right"
+          className="absolute left-4 right-4 md:right-20 lg:right-32 md:left-auto top-1/2 -translate-y-1/2 max-w-lg text-center md:text-right"
         >
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
             Bridging design<br />
             and <span className="text-accent italic font-extrabold">engineering</span>.
           </h2>
-          <p className="mt-5 text-base md:text-lg text-white/50 leading-relaxed max-w-md ml-auto">
+          <p className="mt-5 text-base md:text-lg text-white/50 leading-relaxed max-w-md mx-auto md:ml-auto">
             Focusing on the subtle details that elevate a good interface
             into an unforgettable digital journey.
           </p>

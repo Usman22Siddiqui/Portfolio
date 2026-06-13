@@ -5,7 +5,7 @@ import { GraduationCap, MapPin, Award } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="relative z-20 bg-[#08080a] py-32 px-6 md:px-8">
+    <section id="about" className="relative z-20 bg-[#08080a] py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -25,7 +25,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-2 rounded-2xl bg-white/[0.03] border border-white/10 p-8"
+            className="md:col-span-2 rounded-2xl bg-white/[0.03] border border-white/10 p-6 sm:p-8"
           >
             <p className="text-white/60 leading-relaxed text-lg mb-6">
               I&apos;m <span className="text-white font-semibold">Muhammad Usman Siddiqui</span>, a passionate Software Engineer
@@ -44,7 +44,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl bg-white/[0.03] border border-white/10 p-8 flex flex-col justify-between"
+            className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 sm:p-8 flex flex-col justify-between"
           >
             <div>
               <GraduationCap className="w-8 h-8 text-accent mb-4" />

@@ -24,7 +24,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative z-20 bg-[#08080a] py-32 px-6 md:px-8">
+    <section id="experience" className="relative z-20 bg-[#08080a] py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -42,7 +42,7 @@ export default function Experience() {
         {/* Timeline */}
         <div className="relative">
           {/* Glowing timeline line */}
-          <div className="absolute left-6 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent/50 via-accent/20 to-transparent" />
+          <div className="absolute left-[18px] sm:left-6 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent/50 via-accent/20 to-transparent" />
 
           <div className="space-y-12">
             {experiences.map((exp, i) => (
@@ -52,14 +52,14 @@ export default function Experience() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="relative pl-16"
+                className="relative pl-10 sm:pl-16"
               >
                 {/* Timeline dot */}
-                <div className="absolute left-[14px] top-2 w-6 h-6 rounded-full bg-[#08080a] border-2 border-accent flex items-center justify-center">
+                <div className="absolute left-[6px] sm:left-[14px] top-2 w-6 h-6 rounded-full bg-[#08080a] border-2 border-accent flex items-center justify-center">
                   <Briefcase className="w-3 h-3 text-accent" />
                 </div>
 
-                <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:border-accent/30 transition-all duration-500">
+                <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-5 sm:p-6 hover:border-accent/30 transition-all duration-500">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
                     <div>
                       <h3 className="text-white font-bold text-lg">{exp.company}</h3>

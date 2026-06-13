@@ -31,13 +31,19 @@ export default function JarvisPreview() {
         </div>
 
         {/* Data Points */}
-        {[0, 72, 144, 216, 288].map((deg, i) => (
+        {[
+          { top: "5%", left: "50%" },
+          { top: "36.1%", left: "92.8%" },
+          { top: "86.4%", left: "76.5%" },
+          { top: "86.4%", left: "23.6%" },
+          { top: "36.1%", left: "7.2%" },
+        ].map((pos, i) => (
           <div
             key={i}
             className="absolute w-1.5 h-1.5 rounded-full bg-amber-500"
             style={{
-              top: `${50 - 45 * Math.cos((deg * Math.PI) / 180)}%`,
-              left: `${50 + 45 * Math.sin((deg * Math.PI) / 180)}%`,
+              top: pos.top,
+              left: pos.left,
               animation: `jarvis-dot 1.5s ease-in-out infinite`,
               animationDelay: `${i * 0.3}s`,
             }}

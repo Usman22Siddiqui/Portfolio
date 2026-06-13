@@ -37,7 +37,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative z-20 bg-[#08080a] py-32 px-6 md:px-8">
+    <section id="skills" className="relative z-20 bg-[#08080a] py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -60,7 +60,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: ci * 0.1 }}
-              className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:border-white/20 transition-colors duration-500"
+              className="rounded-2xl bg-white/[0.03] border border-white/10 p-5 sm:p-6 hover:border-white/20 transition-colors duration-500"
             >
               <div className="flex items-center gap-2 mb-6">
                 <span className="text-lg">{category.icon}</span>

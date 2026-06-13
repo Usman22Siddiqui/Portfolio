@@ -37,7 +37,7 @@ const socials = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative z-20 bg-[#08080a] py-32 px-6 md:px-8">
+    <section id="contact" className="relative z-20 bg-[#08080a] py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -67,16 +67,16 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group rounded-2xl bg-white/[0.03] border border-white/10 p-8 transition-all duration-500 ${social.color} hover:bg-white/[0.06] flex flex-col items-center gap-4`}
+                className={`group rounded-2xl bg-white/[0.03] border border-white/10 p-4 md:p-8 transition-all duration-500 ${social.color} hover:bg-white/[0.06] flex flex-row md:flex-col items-center md:justify-center gap-4 w-full text-left md:text-center`}
               >
-                <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                  <Icon className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors flex-shrink-0">
+                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-white/60 group-hover:text-white transition-colors" />
                 </div>
-                <div>
-                  <h3 className="text-white font-semibold text-lg">{social.name}</h3>
-                  <p className="text-white/40 text-sm">{social.handle}</p>
+                <div className="flex-1 md:flex-initial">
+                  <h3 className="text-white font-semibold text-base md:text-lg">{social.name}</h3>
+                  <p className="text-white/40 text-xs md:text-sm">{social.handle}</p>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-accent transition-colors" />
+                <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-accent transition-colors flex-shrink-0 ml-auto md:ml-0" />
               </motion.a>
             );
           })}

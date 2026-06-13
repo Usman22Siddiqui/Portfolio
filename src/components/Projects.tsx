@@ -24,7 +24,7 @@ const previewComponents: Record<string, React.ComponentType> = {
 
 export default function Projects() {
   return (
-    <section id="work" className="relative z-20 bg-[#08080a] py-32 px-6 md:px-8">
+    <section id="work" className="relative z-20 bg-[#08080a] py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -65,12 +65,12 @@ export default function Projects() {
 
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-0">
                   {/* Preview Frame */}
-                  <div className="p-6 lg:p-8">
+                  <div className="p-4 sm:p-6 lg:p-8">
                     {Preview && <Preview />}
                   </div>
 
                   {/* Project Info */}
-                  <div className="p-6 lg:p-8 flex flex-col justify-between">
+                  <div className="p-5 sm:p-6 lg:p-8 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: project.accentColor }}>
